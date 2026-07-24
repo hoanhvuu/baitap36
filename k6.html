@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>K6 - Xử Lý Sự Kiện Bàn Phím</title>
+    <style>
+        #box {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            top: 100px;
+            left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Bài tập K6: Xử lý sự kiện bàn phím</h2>
+    <p>Bấm phím MŨI TÊN LÊN hoặc MŨI TÊN XUỐNG để di chuyển khối màu đỏ.</p>
+    <div id="box"></div>
+    <script>
+        const box = document.getElementById('box');
+        let topPos = 100;
+        const step = 10;
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowUp') {
+                topPos -= step;
+                box.style.top = topPos + 'px';
+            } else if (event.key === 'ArrowDown') {
+                topPos += step;
+                box.style.top = topPos + 'px';
+            }
+        });
+    </script>
+</body>
+</html>

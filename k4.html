@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>K4 - Phân Trang Danh Sách</title>
+    <style>
+        .pagination button {
+            margin: 2px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Bài tập K4: Phân trang danh sách</h2>
+    <ul id="itemList"></ul>
+    <div id="pagination" class="pagination"></div>
+    <script>
+        const items = Array.from({ length: 50 }, (_, i) => `Mục ${i + 1}`);
+        const itemsPerPage = 10;
+        let currentPage = 1;
+
+        function renderList(page) {
+            const list = document.getElementById('itemList');
+            list.innerHTML = '';
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageItems = items.slice(start, end);
+            pageItems.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                list.appendChild(li);
+            });
+        }
+
+        function renderPagination() {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+            const totalPages = Math.ceil(items.length / itemsPerPage);
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.textContent = i;
+                btn.addEventListener('click', () => {
+                    currentPage = i;
+                    renderList(currentPage);
+                });
+                pagination.appendChild(btn);
+            }
+        }
+
+        renderList(currentPage);
+        renderPagination();
+    </script>
+</body>
+</html>
